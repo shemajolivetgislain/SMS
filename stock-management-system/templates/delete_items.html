@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/navbar-fixed/">
 
     <!-- Bootstrap core CSS -->
-<link href="{% static 'css/stylesheet.css' %}" rel="stylesheet">
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
     <style>
@@ -37,36 +37,15 @@
   </head>
   <body>
    {% include 'navbar.html' %}
+
 <main role="main" class="container">
   <div class="jumbotron">
-      <div class="header">{{ title }}</div>
-  <form method='POST' action=''>{% csrf_token %}
-    {{form|crispy}}
-        <input type="submit" value='Search'/>
-  </form><br>
-    <div class="display_table">
-    <table class='table'>
-        <thead>
-          <tr>
-            <th>COUNT</th>
-            <th>CATEGORY</th>
-            <th>ITEM NAME</th>
-            <th>QUANTITY IN STORE</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-      {% for instance in queryset %}
-          <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{instance.category}}</td>
-            <td><a href="{% url 'update_items' instance.id%}">{{instance.item_name}}</a></td>
-            <td>{{instance.quantity}}</td>
-            <td><a href="{% url 'delete_items' instance.id%}"><img src="{% static 'img/trash.png' %}" width="20" height="20"></a></td>
-          </tr>
-      {% endfor %}
-    </table>
+   	<form method='POST' action=''>{% csrf_token %}
+           <h1>Are you sure you what to delete this item ?</h1>
+           <input class="btn btn-danger" type="submit" value="yes">
+           <a href="/list_item"><div class="btn btn-primary">cancel</div></a>
+    </form>
   </div>
-</div>
 </main>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>

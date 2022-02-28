@@ -57,3 +57,13 @@ def update_items(request, pk):
     }
 
     return render(request, "add_items.html", context)
+
+
+def delete_items(request, pk):
+    queryset= Stock.objects.get(id=pk)
+    form = StockCreateForm(instance=queryset)
+    if request.method == 'POST':
+        queryset.delete()
+        return redirect('/list_item')
+
+    return render(request, "delete_items.html")
