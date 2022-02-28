@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import StockCreateForm, StockSearchForm
+from .forms import StockCreateForm, StockSearchForm, StockUpdateForm
 from .models import Stock
 
 
@@ -41,4 +41,19 @@ def add_items(request):
         "form": form,
         "title": "Add Item",
     }
+    return render(request, "add_items.html", context)
+
+
+def update_items(request, pk):
+    queryset= Stock.objects.get(id=pk)
+    form = StockCreateForm(instance=queryset)
+    if request.method == 'POST':
+        form = StockUpdateForm(request.POST, instance=queryset)
+        if form.is_valid():
+            form.save()
+            return redirect('/list_item')
+    context = {
+        'form': form
+    }
+
     return render(request, "add_items.html", context)
