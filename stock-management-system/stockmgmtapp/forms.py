@@ -1,5 +1,5 @@
 from django import forms
-from .models import Stock
+from .models import *
 
 
 class StockCreateForm(forms.ModelForm):
@@ -9,11 +9,12 @@ class StockCreateForm(forms.ModelForm):
 
     def clean_category(self):
         category = self.cleaned_data.get('category')
+        # VALIDATION PART
         if not category:
             raise forms.ValidationError('This field is required')
-        for instance in Stock.objects.all():
-            if instance.category == category:
-                raise forms.ValidationError(category + 'is already exist')
+        # for instance in Stock.objects.all():
+        #     if instance.category == category:
+        #         raise forms.ValidationError(category + 'is already exist')
         return category
 
     def clean_item_name(self):

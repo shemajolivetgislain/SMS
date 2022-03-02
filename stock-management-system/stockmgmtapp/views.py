@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import StockCreateForm, StockSearchForm, StockUpdateForm
-from .models import Stock
+from .forms import *
+from .models import *
 
 
 def home(request):
