@@ -38,3 +38,11 @@ th {
   background-color: #337ab7;
   color: white;
 }
+
+.messages{
+	list-style: none;
+	background-color: #117a8b;
+	color: white;
+	box-shadow: 12px 12px 12px #e61c66;
+	text-align: center;
+}

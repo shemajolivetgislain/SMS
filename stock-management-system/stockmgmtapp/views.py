@@ -3,6 +3,7 @@ from .forms import *
 from .models import *
 from django.http import HttpResponse
 import csv
+from django.contrib import messages
 
 
 def home(request):
@@ -48,6 +49,7 @@ def add_items(request):
     form = StockCreateForm(request.POST or None)
     if form.is_valid():
         form.save()
+        messages.success(request, 'successful added')
         return redirect('/list_item')
     context = {
         "form": form,
@@ -72,10 +74,11 @@ def update_items(request, pk):
 
 
 def delete_items(request, pk):
-    queryset= Stock.objects.get(id=pk)
+    queryset = Stock.objects.get(id=pk)
     form = StockCreateForm(instance=queryset)
     if request.method == 'POST':
         queryset.delete()
+        messages.success(request, 'successful deleted')
         return redirect('/list_item')
 
     return render(request, "delete_items.html")
