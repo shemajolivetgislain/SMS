@@ -82,3 +82,13 @@ def delete_items(request, pk):
         return redirect('/list_item')
 
     return render(request, "delete_items.html")
+
+
+def stock_detail(request, pk):
+    queryset = Stock.objects.get(id=pk)
+    context = {
+        'title': queryset.item_name,
+        "queryset": queryset
+    }
+
+    return render(request, "stock_detail.html", context)
